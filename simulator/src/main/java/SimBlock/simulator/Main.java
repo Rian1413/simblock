@@ -41,7 +41,7 @@ import SimBlock.task.MiningTask;
 
 public class Main {
 	public static Random random = new Random(10);
-	public static long time1 = 0;//a value to know the simation time.
+	public static long time1 = 0;   //a value to know the simulation time.
 
 	public static URI CONF_FILE_URI;
 	public static URI OUT_FILE_URI;
@@ -72,7 +72,8 @@ public class Main {
 		}
 	}
 
-	public static void main(String[] args){
+	public static void main(String[] args)
+        {
 		long start = System.currentTimeMillis();
 		setTargetInterval(INTERVAL);
 
@@ -90,17 +91,19 @@ public class Main {
 
 			if(getTask() instanceof MiningTask){
 				MiningTask task = (MiningTask) getTask();
-				if(task.getParent().getHeight() == j) j++;
-				if(j > ENDBLOCKHEIGHT){break;}
+				if(task.getParent().getHeight() == j)
+                                    j++;
+				if(j > ENDBLOCKHEIGHT)
+                                {break;}
 				if(j%100==0 || j==2) writeGraph(j);
 			}
 			runTask();
 		}
 
 
-		printAllPropagation();
+		printAllPropagation(); // the output
 
-		System.out.println();
+	//	System.out.println();
 
 		Set<Block> blocks = new HashSet<Block>();
 		Block block  = getSimulatedNodes().get(0).getBlock();
@@ -162,8 +165,8 @@ public class Main {
 		OUT_JSON_FILE.print("]"); //end json format
 		OUT_JSON_FILE.close();
 		long end = System.currentTimeMillis();
-		time1 += end -start;
-		System.out.println(time1);
+		time1 += end - start;
+		System.out.println("the time in miilies" + time1);
 
 	}
 
@@ -221,7 +224,7 @@ public class Main {
 			OUT_JSON_FILE.print("{");
 			OUT_JSON_FILE.print(	"\"kind\":\"add-node\",");
 			OUT_JSON_FILE.print(	"\"content\":{");
-			OUT_JSON_FILE.print(		"\"timestamp\":0,");
+			OUT_JSON_FILE.print(		"\"timestampRayan\":0,");
 			OUT_JSON_FILE.print(		"\"node-id\":" + id + ",");
 			OUT_JSON_FILE.print(		"\"region-id\":" + regionList.get(id-1));
 			OUT_JSON_FILE.print(	"}");
@@ -241,7 +244,7 @@ public class Main {
 			FileWriter fw = new FileWriter(new File(OUT_FILE_URI.resolve("./graph/"+ j +".txt")), false);
 			PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
 
-            for(int index =1;index<=getSimulatedNodes().size();index++){
+            for(int index =1 ; index<=getSimulatedNodes().size() ; index++){
     			Node node = getSimulatedNodes().get(index-1);
     			for(int i=0;i<node.getNeighbors().size();i++){
     				Node neighter = node.getNeighbors().get(i);

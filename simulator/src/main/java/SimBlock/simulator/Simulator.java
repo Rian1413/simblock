@@ -84,16 +84,16 @@ public class Simulator {
 				observedPropagations.remove(0);
 			}
 			LinkedHashMap<Integer, Long> propagation = new LinkedHashMap<Integer, Long>();
-			propagation.put(node.getNodeID(), getCurrentTime() - block.getTime());
+			propagation.put(node.getNodeID(), getCurrentTime() - block.getTime()); // the values of the outputs
 			observedBlocks.add(block);
 			observedPropagations.add(propagation);
 		}
 	}
 	
-	public static void printPropagation(Block block,LinkedHashMap<Integer, Long> propagation){
-		System.out.println(block + ":" + block.getHeight());
+	public static void printPropagation(Block block,LinkedHashMap < Integer, Long > propagation){
+		System.out.println(block + "::" + block.getHeight());
 		for(Map.Entry<Integer, Long> timeEntry : propagation.entrySet()){
-			System.out.println(timeEntry.getKey() + "," + timeEntry.getValue());
+			System.out.println(timeEntry.getKey() + ",," + timeEntry.getValue());
 		}
 		System.out.println();
 	}
